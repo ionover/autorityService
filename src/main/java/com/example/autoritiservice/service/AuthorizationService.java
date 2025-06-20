@@ -1,6 +1,7 @@
 package com.example.autoritiservice.service;
 
 import com.example.autoritiservice.Authorities;
+import com.example.autoritiservice.User;
 import com.example.autoritiservice.exception.InvalidCredentials;
 import com.example.autoritiservice.exception.UnauthorizedUser;
 import com.example.autoritiservice.repository.UserRepository;
@@ -17,7 +18,10 @@ public class AuthorizationService {
         this.userRepository = userRepository;
     }
 
-    public List<Authorities> getAuthorities(String user, String password) {
+    public List<Authorities> getAuthorities(User userClass) {
+        String user = userClass.getUser();
+        String password = userClass.getPassword();
+
         if (isEmpty(user) || isEmpty(password)) {
             throw new InvalidCredentials("User name or password is empty");
         }
